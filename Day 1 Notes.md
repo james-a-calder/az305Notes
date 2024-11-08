@@ -698,9 +698,9 @@ Use a layered (defense in depth) approach to data protection
   - Roles & Permissions
   - Row Level Security
 - Data Protection
-  - Encryption-in-use (Always encrypted)
-  - Encryption-at-rest (TDE)
-  - Encryption-in-flight (TLS)
+  - Encryption-in-use (Always Encrypted)
+  - Encryption-at-rest (TDE - Transparent Data Encryption)
+  - Encryption-in-flight (TLS - Transport Layer Security)
   - Customer-managed-keys
   - Dynamic data masking
 - Security Management
