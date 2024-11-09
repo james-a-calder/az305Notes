@@ -1,4 +1,4 @@
-# AZ-305 - Day 1 (Subject)
+# AZ-305 - Day 1
 ## Design a Governance Solution
 ### Objectives
 ![Objectives](Screenshots/Day1/Gov1.PNG)
@@ -747,5 +747,7 @@ A fully managed NoSQL database service for modern app development. It has single
 - **Azure Table Storage:** is a service that stores non-relation structured data (also know an structured NoSQL data) in the cloud, providing a key/attribute store with a schemeless design.
 - **Azure Cosmos DB for Table:** provides the Table API for applications that are written for Azure Table storage and that need premium capabilities like high availability, scalability, and dedicated throughput.
 #### Differences in Behavior
-- 
+- You are charged for the capacity of an Azure Cosmos DB table as soon as it is created, even if the capacity isn't used.
+- Query results from Azure Cosmos DB are ...
+
 ![Azure Storage Tables And Azure Cosmos DB Tables](Screenshots/Day1/RelationData13.PNG)
