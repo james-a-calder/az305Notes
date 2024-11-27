@@ -1,4 +1,107 @@
 # AZ-305 - Day 2
+## Table of Contents
+- [AZ-305 - Day 2](#az-305---day-2)
+  - [Table of Contents](#table-of-contents)
+  - [Data Integration](#data-integration)
+    - [Learning Objectives](#learning-objectives)
+    - [Data-driven Workflows](#data-driven-workflows)
+    - [Azure Data Lake](#azure-data-lake)
+      - [Access Control List (ACL)](#access-control-list-acl)
+        - [Example](#example)
+    - [Compare Azure Blob Storage vs Azure Data Lake](#compare-azure-blob-storage-vs-azure-data-lake)
+    - [Azure Databricks](#azure-databricks)
+    - [Azure Synapse Analytics](#azure-synapse-analytics)
+    - [Compare Data Factory to Synapse](#compare-data-factory-to-synapse)
+    - [Compare Synapse to Databricks](#compare-synapse-to-databricks)
+    - [Azure Stream Analytics](#azure-stream-analytics)
+    - [When to use Hot/Warm/Cold data path](#when-to-use-hotwarmcold-data-path)
+    - [IoT Hub vs Event Hub (not mentioned on the course but was in Questions)](#iot-hub-vs-event-hub-not-mentioned-on-the-course-but-was-in-questions)
+      - [Azure Event Hub Scenario](#azure-event-hub-scenario)
+        - [Scenario: Real-Time Analytics for Online Retail](#scenario-real-time-analytics-for-online-retail)
+      - [Azure IoT Hub Scenario](#azure-iot-hub-scenario)
+        - [Scenario: Smart Manufacturing with Predictive Maintenance](#scenario-smart-manufacturing-with-predictive-maintenance)
+  - [Application Archetecture](#application-archetecture)
+    - [Learning Objectives](#learning-objectives-1)
+    - [Determine message event and event scenarios](#determine-message-event-and-event-scenarios)
+    - [Design for Azure Queue storage](#design-for-azure-queue-storage)
+    - [Designs for Service Bus queues and topics](#designs-for-service-bus-queues-and-topics)
+      - [Service Bus Queues](#service-bus-queues)
+      - [Service Bus Topics](#service-bus-topics)
+    - [Compare messaging solutions](#compare-messaging-solutions)
+    - [Design An Event Hub Messaging Solution](#design-an-event-hub-messaging-solution)
+    - [Design Event-driven solution](#design-event-driven-solution)
+    - [Comparison of Message and Event Solutions](#comparison-of-message-and-event-solutions)
+    - [Design an IoT Hub Solution](#design-an-iot-hub-solution)
+      - [When to use IoT Hub?](#when-to-use-iot-hub)
+      - [Capabilities over Event Hub](#capabilities-over-event-hub)
+    - [When to use Azure Cache for Redis](#when-to-use-azure-cache-for-redis)
+    - [Design an Azure API Management Solution](#design-an-azure-api-management-solution)
+      - [Key Features:](#key-features)
+      - [Common Scenarios:](#common-scenarios)
+    - [What is Infrastructure As Code (IaC)](#what-is-infrastructure-as-code-iac)
+    - [Design an Azure App Configuration Solution](#design-an-azure-app-configuration-solution)
+  - [Authentication \& Authorization](#authentication--authorization)
+    - [Learning Objectives](#learning-objectives-2)
+    - [Zero Trust Model](#zero-trust-model)
+    - [How Hybrid Works](#how-hybrid-works)
+      - [What is a Domain Controller (DC)?](#what-is-a-domain-controller-dc)
+        - [Some Acronyms and buzz words that can come up](#some-acronyms-and-buzz-words-that-can-come-up)
+    - [What is Identity and Access Management](#what-is-identity-and-access-management)
+    - [When to use Microsoft Entra ID](#when-to-use-microsoft-entra-id)
+      - [Connect Sync vs Cloud Sync](#connect-sync-vs-cloud-sync)
+    - [When to use Microsoft Entra Business to Business (B2B)](#when-to-use-microsoft-entra-business-to-business-b2b)
+    - [When to use Azure AD Business to Customer (B2C)](#when-to-use-azure-ad-business-to-customer-b2c)
+    - [When to use Conditional Access](#when-to-use-conditional-access)
+    - [When To Use Identity Protection](#when-to-use-identity-protection)
+    - [Privileged Access Management (PAM)](#privileged-access-management-pam)
+    - [Privileged Identity Management (PIM)](#privileged-identity-management-pim)
+    - [PAM vs PIM](#pam-vs-pim)
+      - [Key Differences:](#key-differences)
+    - [When to Use Access Review](#when-to-use-access-review)
+    - [Design Managed Identities](#design-managed-identities)
+    - [Select Managed Identities](#select-managed-identities)
+    - [Select Application Service Principal](#select-application-service-principal)
+    - [Design For Key Vault](#design-for-key-vault)
+    - [Key Differences:](#key-differences-1)
+  - [Monitoring](#monitoring)
+    - [Learning Objectives](#learning-objectives-3)
+    - [Review Azure Monitor Capabilities](#review-azure-monitor-capabilities)
+    - [Identify data sources and access methods](#identify-data-sources-and-access-methods)
+    - [Whats is Log Analytics](#whats-is-log-analytics)
+    - [Considerations for Workspaces Access Control](#considerations-for-workspaces-access-control)
+    - [Design for Azure Workbooks](#design-for-azure-workbooks)
+    - [Select Application Insights](#select-application-insights)
+    - [Creating Alerts](#creating-alerts)
+      - [Rules](#rules)
+      - [Action group](#action-group)
+    - [When to UseData Explorer](#when-to-usedata-explorer)
+  - [Networking](#networking)
+    - [Learning Objectives](#learning-objectives-4)
+    - [Defense in Depth](#defense-in-depth)
+    - [Design Azure Virtual Networks](#design-azure-virtual-networks)
+    - [Design Network Topology](#design-network-topology)
+    - [Design Outbound Connectivity](#design-outbound-connectivity)
+    - [Design Routing](#design-routing)
+    - [VPN Connection](#vpn-connection)
+    - [Azure ExpressRoute and ExpressRoute Direct Connection](#azure-expressroute-and-expressroute-direct-connection)
+    - [ExpressRoute with VPN Failover](#expressroute-with-vpn-failover)
+    - [Azure Virtual WAN](#azure-virtual-wan)
+    - [Choosing a Load Balancer Solution](#choosing-a-load-balancer-solution)
+      - [Load Balancer (Layer 4)](#load-balancer-layer-4)
+      - [Application Gateway](#application-gateway)
+      - [Traffic Manager](#traffic-manager)
+      - [Azure Front Door Service](#azure-front-door-service)
+      - [Content Delivery Network (CDN)](#content-delivery-network-cdn)
+    - [Service Endpoints](#service-endpoints)
+    - [Azure Private Link](#azure-private-link)
+    - [Network Security Groups (NSG)](#network-security-groups-nsg)
+      - [Application Security Groups](#application-security-groups)
+    - [Azure Firewall](#azure-firewall)
+    - [Web Application Firewall](#web-application-firewall)
+    - [DDoS Protection](#ddos-protection)
+    - [Azure Bastion](#azure-bastion)
+    - [Just in Time (JIT) Network Access](#just-in-time-jit-network-access)
+
 ## Data Integration
 ### Learning Objectives
 ![Data Integration - Learning Objectives](Screenshots/Day2/DataIntegration1.PNG)
@@ -85,6 +188,8 @@ Azure Databricks is a fully managed, cloud-based Big Data and
 | **Supported Activities** | Includes activities like copy, data flow, and custom activities.          | Includes activities like data flows, Spark jobs, and SQL pool stored procedures.      |
 
 [Data integration in Azure Synapse Analytics versus Azure Data Factory 📎](https://learn.microsoft.com/en-us/azure/synapse-analytics/data-integration/concepts-data-factory-differences#available-features-in-adf--azure-synapse-ana)
+
+***From a practice exam:** Data factory is the recommend method when migrating data from Data Lake Gen1 to Gen2*
 
 ### Compare Synapse to Databricks
 ![Compare Synapse to Databricks](Screenshots/Day2/DataIntegration8.PNG)
@@ -177,7 +282,7 @@ Service Bus decouples applications and services from each other.
 ![Designs for Service Bus queues and topics](Screenshots/Day2/AppArc4.PNG)
 
 ### Compare messaging solutions
-![Compare messaging solutions](Screenshots/Day2/AppArc4.PNG)
+![Compare messaging solutions](Screenshots/Day2/AppArc5.PNG)
 
 [SLA for Storage 📎](https://www.azure.cn/en-us/support/sla/storage/)
 
@@ -307,6 +412,13 @@ Azure App Configuration centrally manages application settings and feature flags
 
 ## Authentication & Authorization
 The 5 A's
+
+- Authentication
+- Authorization
+- Accounting
+- Auditing
+- Administration
+
 ### Learning Objectives
 ![Learning Objectives](Screenshots/Day2/AA01.PNG)
 

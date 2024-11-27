@@ -1,4 +1,35 @@
 # AZ-305 - Day 3
+## Table of Contents
+- [AZ-305 - Day 3](#az-305---day-3)
+  - [Table of Contents](#table-of-contents)
+  - [Business Continuity](#business-continuity)
+    - [Learning Objectives](#learning-objectives)
+    - [Plan for backup and recovery](#plan-for-backup-and-recovery)
+    - [When To Use Azure Backup](#when-to-use-azure-backup)
+      - [Azure Recovery Services Vault vs Backup Vaults](#azure-recovery-services-vault-vs-backup-vaults)
+        - [Key Differences:](#key-differences)
+    - [Considerations For Soft Deletes](#considerations-for-soft-deletes)
+    - [Considerations for Point-in-Time Restore](#considerations-for-point-in-time-restore)
+    - [Considerations fro Azure Files Backup and Recovery](#considerations-fro-azure-files-backup-and-recovery)
+    - [Considerations for Azure Virtual Machines](#considerations-for-azure-virtual-machines)
+    - [How Azure SQL Backup Works](#how-azure-sql-backup-works)
+    - [Considerations For Azure SQL Backup](#considerations-for-azure-sql-backup)
+    - [When to use Azure Site Recovery](#when-to-use-azure-site-recovery)
+    - [Combine Azure Site Recovery with Azure Backup](#combine-azure-site-recovery-with-azure-backup)
+  - [Migrations](#migrations)
+    - [Learning Objectives](#learning-objectives-1)
+    - [Review the Cloud Adoption Frameworks](#review-the-cloud-adoption-frameworks)
+    - [Focus on Migration Efforts](#focus-on-migration-efforts)
+    - [Determine Your Migration Strategy](#determine-your-migration-strategy)
+    - [Determine What to Migrate](#determine-what-to-migrate)
+    - [Identify Migration Tools](#identify-migration-tools)
+    - [Select Database Migration Type](#select-database-migration-type)
+    - [Consider using Azure File Sync](#consider-using-azure-file-sync)
+    - [Consider the Storage Migration Service](#consider-the-storage-migration-service)
+    - [Consider the Import/Export Service](#consider-the-importexport-service)
+    - [Consider the Data Box Family of Products](#consider-the-data-box-family-of-products)
+    - [Compare Data Migration Solutions](#compare-data-migration-solutions)
+
 ## Business Continuity
 ### Learning Objectives
 ![Learning Objectives](Screenshots/Day3/Backups1.PNG)
@@ -44,7 +75,7 @@ Azure Backup is a full-service backup and recovery solutions
 - **Azure Backup Vault** is an older, simpler solution focused on specific Azure resources and snapshot-level backups.
 
 ### Considerations For Soft Deletes
-Consider soft deletes with recovery times from 1 to 365
+Consider soft deletes with recovery times from 1 to 365 days.
 ![Considerations For Soft Deletes](Screenshots/Day3/Backups4.PNG)
 
 ### Considerations for Point-in-Time Restore

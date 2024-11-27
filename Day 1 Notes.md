@@ -1,4 +1,101 @@
 # AZ-305 - Day 1
+
+## Table of Contents
+- [AZ-305 - Day 1](#az-305---day-1)
+  - [Table of Contents](#table-of-contents)
+  - [Design a Governance Solution](#design-a-governance-solution)
+    - [Objectives](#objectives)
+    - [Govern resources in Azure](#govern-resources-in-azure)
+      - [Azure Management Areas](#azure-management-areas)
+        - [Monitor](#monitor)
+        - [Configure](#configure)
+        - [Govern](#govern)
+        - [Secure](#secure)
+        - [Protect](#protect)
+        - [Migrate](#migrate)
+    - [Plan your management groups](#plan-your-management-groups)
+    - [Design for multiple subscriptions](#design-for-multiple-subscriptions)
+      - [Useful Links](#useful-links)
+    - [When to use subscriptions - example](#when-to-use-subscriptions---example)
+    - [Plan your resource groups](#plan-your-resource-groups)
+      - [Useful Links](#useful-links-1)
+      - [Useful open source application that helps with Azure resource naming](#useful-open-source-application-that-helps-with-azure-resource-naming)
+    - [Plan your Resource Tagging](#plan-your-resource-tagging)
+    - [When To Use Azure Policy](#when-to-use-azure-policy)
+    - [Consideration for Azure Policy](#consideration-for-azure-policy)
+    - [Design for Azure Role-Base Access Control (RBAC)](#design-for-azure-role-base-access-control-rbac)
+    - [When to combine Azure Policy and Azure RBAC](#when-to-combine-azure-policy-and-azure-rbac)
+    - [Implement Azure Landing Zones](#implement-azure-landing-zones)
+        - [Key Components of Azure Landing Zones:](#key-components-of-azure-landing-zones)
+        - [Benefits:](#benefits)
+    - [Design with Azure Blueprints](#design-with-azure-blueprints)
+      - [*Azure Blueprints are being deprecated in favour of Template Specs and Deployment Stacks*](#azure-blueprints-are-being-deprecated-in-favour-of-template-specs-and-deployment-stacks)
+        - [Azure Deployment Stacks](#azure-deployment-stacks)
+          - [Key Features:](#key-features)
+          - [Use Cases:](#use-cases)
+          - [More Than Just a Library of Bicep Files:](#more-than-just-a-library-of-bicep-files)
+        - [Azure Template Specs](#azure-template-specs)
+          - [Key Features:](#key-features-1)
+          - [Benefits:](#benefits-1)
+          - [Example Workflow:](#example-workflow)
+  - [Compute Solutions](#compute-solutions)
+    - [Learning Objectives](#learning-objectives)
+    - [Choose a compute service for your application](#choose-a-compute-service-for-your-application)
+    - [When to Select Virtual Machines](#when-to-select-virtual-machines)
+    - [Plan the Azure virtual machine deployment](#plan-the-azure-virtual-machine-deployment)
+    - [Determine the Virtual Machine Family](#determine-the-virtual-machine-family)
+    - [When to select Virtual machine scale sets](#when-to-select-virtual-machine-scale-sets)
+    - [When to use Azure Batch](#when-to-use-azure-batch)
+    - [How Azure Batch Works](#how-azure-batch-works)
+    - [Azure App Services](#azure-app-services)
+      - [When to use Azure App Services Web Apps](#when-to-use-azure-app-services-web-apps)
+      - [Considerations for App Service Web Apps](#considerations-for-app-service-web-apps)
+        - [Azure Compute Unit (ACU)](#azure-compute-unit-acu)
+    - [Containers](#containers)
+      - [What Is Azure Container Instance](#what-is-azure-container-instance)
+      - [Compare Containers to Virtual Machines](#compare-containers-to-virtual-machines)
+    - [Azure Kubernetes Services (AKS)](#azure-kubernetes-services-aks)
+      - [Considerations for AKS](#considerations-for-aks)
+      - [Design a Highly Available Container Solution](#design-a-highly-available-container-solution)
+    - [Azure Functions](#azure-functions)
+      - [When To Use Azure Functions](#when-to-use-azure-functions)
+      - [Considerations for Azure Functions](#considerations-for-azure-functions)
+      - [Azure Logic Apps](#azure-logic-apps)
+        - [What are Azure Logic Apps](#what-are-azure-logic-apps)
+        - [Key Features:](#key-features-2)
+        - [Use Cases:](#use-cases-1)
+      - [How are Logic Apps Different From Functions](#how-are-logic-apps-different-from-functions)
+  - [Data Storage](#data-storage)
+    - [Learning Objectives](#learning-objectives-1)
+    - [Classify your data storage](#classify-your-data-storage)
+    - [Determine the best storage account type](#determine-the-best-storage-account-type)
+    - [Considerations For Storage Accounts](#considerations-for-storage-accounts)
+    - [Designs For Data Redundancy](#designs-for-data-redundancy)
+    - [Determine The Storage Tier](#determine-the-storage-tier)
+    - [Immutable Storage Policies](#immutable-storage-policies)
+      - [WORM Storage](#worm-storage)
+      - [Standard Retention Policies vs. Preservation Retention Policies](#standard-retention-policies-vs-preservation-retention-policies)
+    - [Compare Azure Files to Azure Blobs](#compare-azure-files-to-azure-blobs)
+    - [Design for NetApp Files](#design-for-netapp-files)
+    - [Disk Solutions](#disk-solutions)
+      - [Redundant Array of Independent Disks (RAID)](#redundant-array-of-independent-disks-raid)
+    - [Considerations for storage security](#considerations-for-storage-security)
+  - [Data Storage for Relational Data](#data-storage-for-relational-data)
+    - [Learning Objectives](#learning-objectives-2)
+    - [Design for structured and sem-structured data](#design-for-structured-and-sem-structured-data)
+    - [When to use Azure SQL Database](#when-to-use-azure-sql-database)
+    - [Selecting an Azure SQL Database Pricing Model](#selecting-an-azure-sql-database-pricing-model)
+    - [High Availability with General Purpose/Standard Tier](#high-availability-with-general-purposestandard-tier)
+    - [High Availability with Business Critical/Premium Tier](#high-availability-with-business-criticalpremium-tier)
+    - [High Availability with Hyperscale Tier](#high-availability-with-hyperscale-tier)
+    - [Select a Database Failover Strategy](#select-a-database-failover-strategy)
+    - [Protect Your Database](#protect-your-database)
+    - [Authentication to an Azure SQL Database](#authentication-to-an-azure-sql-database)
+    - [When To Use Azure SQL Edge](#when-to-use-azure-sql-edge)
+    - [When to use Azure Cosmos DB](#when-to-use-azure-cosmos-db)
+    - [Azure Storage Tables And Azure Cosmos DB Tables](#azure-storage-tables-and-azure-cosmos-db-tables)
+      - [Differences in Behavior](#differences-in-behavior)
+
 ## Design a Governance Solution
 ### Objectives
 ![Objectives](Screenshots/Day1/Gov1.PNG)
@@ -7,9 +104,40 @@
 Governance provides mechanisms and processes to maintain control over your applications and resources in Azure
 ![Govern resources](Screenshots/Day1/Gov2.PNG)
 
+![Areas of management that require maintaining](Screenshots/Day1/Gov3.PNG)
+
+#### Azure Management Areas
+
 [Azure Management Areas 📎](https://learn.microsoft.com/en-us/azure/governance/management-groups/azure-management)
 
-![Areas of management that require maintaining](Screenshots/Day1/Gov3.PNG)
+No single Azure service completely fills the requirements of a particular management area. Instead, each is realized by several services working together. Some services, such as Application Insights, provide targeted monitoring functionality for web applications. Others, like Azure Monitor logs, store management data for other services. This feature allows you to analyze data of different types collected by different services.
+
+The following sections briefly describe the different management areas and provide links to detailed content on the main Azure services intended to address them.
+
+##### Monitor
+
+Monitoring is the act of collecting and analyzing data to audit the performance, health, and availability of your resources. An effective monitoring strategy helps you understand the operation of components and to increase your uptime with notifications. Read an overview of Monitoring that covers the different services used at [Monitoring Azure applications and resources](https://docs.microsoft.com/azure/monitoring/).
+
+##### Configure
+
+Configure refers to the initial deployment and configuration of resources and ongoing maintenance. Automation of these tasks allows you to eliminate redundancy, minimizing your time and effort and increasing your accuracy and efficiency. Azure Automation provides the bulk of services for automating configuration tasks. While runbooks handle process automation, configuration and update management help manage configuration.
+
+##### Govern
+
+Governance provides mechanisms and processes to maintain control over your applications and resources in Azure. It involves planning your initiatives and setting strategic priorities. Governance in Azure is primarily implemented with two services. Azure Policy allows you to create, assign, and manage policy definitions to enforce rules for your resources. This feature keeps those resources in compliance with your corporate standards. Azure Cost Management allows you to track cloud usage and expenditures for your Azure resources and other cloud providers.
+
+##### Secure
+
+Manage the security of your resources and data. A security program involves assessing threats, collecting and analyzing data, and compliance of your applications and resources. Security monitoring and threat analysis are provided by Microsoft Defender for Cloud, which includes unified security management and advanced threat protection across hybrid cloud workloads. See [Introduction to Azure Security](https://docs.microsoft.com/azure/security/) for comprehensive information and guidance on securing Azure resources.
+
+##### Protect
+
+Protection refers to keeping your applications and data available, even with outages that are beyond your control. Protection in Azure is provided by two services. Azure Backup provides backup and recovery of your data, either in the cloud or on-premises. Azure Site Recovery provides business continuity and immediate recovery during a disaster.
+
+##### Migrate
+
+Migration refers to transitioning workloads currently running on-premises to the Azure cloud. Azure Migrate is a service that helps you assess the migration suitability of on-premises virtual machines to Azure. Azure Site Recovery migrates virtual machines from on-premises or from Amazon Web Services. Azure Database Migration Service assists you in migrating database sources to Azure Data platforms.
+
 
 ### Plan your management groups
 Management groups manage access, Policy and compliance subscriptions
@@ -106,7 +234,7 @@ A resource group is a container that holds related resources for an Azure soluti
 
 ### When To Use Azure Policy
 Azure policy helps enforce organisational standards and to assess compliance at scale.
-- Latge number of built in policies
+- Large number of built in policies
 - Examples
   - Allow only certain virtual machine sizes
   - Ensure all resources are correctly tagged - if not apply the tag
@@ -134,7 +262,7 @@ Azure policy helps enforce organisational standards and to assess compliance at 
 Azure RBAC allows you to grant access to Azure resources that you control
 - Only grant users the access they need
 - Assign at the highest scope level that meets the requirements
-- Assign to roles to groups, not users
+- Assign roles to groups, not users
 - Know when to create custom role
 - Consider what happens if you have overlapping role assignments
 
@@ -177,6 +305,8 @@ By using Azure Landing Zones, organizations can accelerate their cloud adoption 
 Azure Blueprints lets you define a repeatable set of governance tools and standard Azure resources that your organisation requires. Blueprint is a form of orchestration.
 
 ![Implement Landing Zones](Screenshots/Day1/Gov14.PNG)
+
+> If you update a blueprint all resources created using it will also be updated similar to updating and deploying an ARM or Bicep template.
 
 > If you delete a blueprint the resources created by it will remain.
 
@@ -636,17 +766,17 @@ Use a layered model to secure and control access
 | **Compatibility and Maintenance**       | Configurable maintenance windows. Compatibility with the SQL Server version can be achieved only using database compatibility levels. | Configurable maintenance windows. Compatibility with the SQL Server version can be achieved only using database compatibility levels. | Configurable maintenance windows. Compatibility with the SQL Server version can be achieved only using database compatibility levels.                                                                                              |
 
 ### Selecting an Azure SQL Database Pricing Model
-[Selecting an Azure SQL Database Pricing Model](Screenshots/Day1/RelationData4.PNG)
+![Selecting an Azure SQL Database Pricing Model](Screenshots/Day1/RelationData4.PNG)
 
 ### High Availability with General Purpose/Standard Tier
-[High Availability with General Purpose/Standard Tier](Screenshots/Day1/RelationData5.PNG)
+![High Availability with General Purpose/Standard Tier](Screenshots/Day1/RelationData5.PNG)
 
 [What is Azure SQL Database? 📎](https://learn.microsoft.com/en-us/azure/azure-sql/database/sql-database-paas-overview?view=azuresql)
 
 ### High Availability with Business Critical/Premium Tier
 Azure SQL Database offers three service tiers designed for different types of applications
 
-[High Availability with Business Critical/Premium Tier](Screenshots/Day1/RelationData6.PNG)
+![High Availability with Business Critical/Premium Tier](Screenshots/Day1/RelationData6.PNG)
 
 ### High Availability with Hyperscale Tier
 - Designed for very large OLTP (Online Transaction Processing) database - as large as 100TB
@@ -655,7 +785,7 @@ Azure SQL Database offers three service tiers designed for different types of ap
 - Restores in minutes rather than hours and days
 - Scale up or down in real time to accommodate workloads
 
-[High Availability with Hyperscale Tier](Screenshots/Day1/RelationData7.PNG)
+![High Availability with Hyperscale Tier](Screenshots/Day1/RelationData7.PNG)
 
 [vCore purchasing model - Azure SQL Database 📎](https://learn.microsoft.com/en-us/azure/azure-sql/database/service-tiers-sql-database-vcore?view=azuresql)
 

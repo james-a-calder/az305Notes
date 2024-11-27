@@ -9,6 +9,19 @@
 1 Hour 30 for 50~ questions
 You do have access to Microsoft Learn but this will eat into your times
 
+## Table of Contents
+- [AZ-305 - Day 0 (Orientation)](#az-305---day-0-orientation)
+  - [Table of Contents](#table-of-contents)
+  - [Course Overview](#course-overview)
+  - [Course Content](#course-content)
+  - [Exam Breakdown](#exam-breakdown)
+  - [Case Studies](#case-studies)
+  - [Microsoft Cloud Adoption Framework for Azure](#microsoft-cloud-adoption-framework-for-azure)
+    - [Very Important Links](#very-important-links)
+  - [Labs (Go Deploy)](#labs-go-deploy)
+    - [Lab Guide](#lab-guide)
+
+
 ## Course Overview
 65% crossover with AZ-104
 
